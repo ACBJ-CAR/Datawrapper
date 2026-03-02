@@ -6,14 +6,14 @@ import json
 import logging
 import os
 import warnings
-from io import StringIO
 from pathlib import Path
 from typing import Any
 
-import pandas as pd
 import requests as r
 from IPython.display import IFrame, Image
+from narwhals.typing import IntoDataFrame
 
+from .dataframe_utils import from_csv, to_csv
 from .exceptions import FailedRequestError, InvalidRequestError, RateLimitError
 
 logger = logging.getLogger(__name__)
@@ -168,7 +168,7 @@ class Datawrapper:
                 return response.json()
             # If it's a csv, read the text into a dataframe
             if "text/csv" in response.headers["content-type"]:
-                return pd.read_csv(StringIO(response.text))
+                return from_csv(response.text)
             # Otherwise just return the content
             return response.content
         # If not, raise an exception
@@ -688,7 +688,7 @@ class Datawrapper:
         title: str,
         chart_type: str,
         theme: str | None = None,
-        data: pd.DataFrame | str | None = None,
+        data: IntoDataFrame | str | None = None,
         external_data_url: str | None = None,
         folder_id: int | None = None,
         organization_id: str | None = None,
@@ -710,8 +710,8 @@ class Datawrapper:
             Chart type to be created. See https://developer.datawrapper.de/docs/chart-types
         theme : str, optional
             Theme to use for new chart, table or map, by default None
-        data : pd.DataFrame | str, optional
-            A pandas DataFrame or string containing the data to be added,
+        data : IntoDataFrame | str, optional
+            A dataframe (pandas, Polars, PyArrow, etc.) or string containing the data to be added,
             by default None
         external_data_url: str, optional
             URL to external data to be added to the chart, table or map,
@@ -779,7 +779,7 @@ class Datawrapper:
         title: str | None = None,
         chart_type: str | None = None,
         theme: str | None = None,
-        data: pd.DataFrame | str | None = None,
+        data: IntoDataFrame | str | None = None,
         external_data_url: str | None = None,
         folder_id: int | None = None,
         organization_id: str | None = None,
@@ -803,8 +803,8 @@ class Datawrapper:
             New chart type. See https://developer.datawrapper.de/docs/chart-types
         theme: str, optional
             New theme
-        data: pd.DataFrame | str, optional
-            A pandas DataFrame or string containing the data to be added,
+        data: IntoDataFrame | str, optional
+            A dataframe (pandas, Polars, PyArrow, etc.) or string containing the data to be added,
             by default None
         external_data_url: str, optional
             URL to external data to be added to the chart, table or map,
@@ -1330,7 +1330,7 @@ class Datawrapper:
         # Use the newer method
         return self.get_data(chart_id)
 
-    def add_data(self, chart_id: str, data: pd.DataFrame | str) -> bool:
+    def add_data(self, chart_id: str, data: IntoDataFrame | str) -> bool:
         """Add data to a specified chart.
 
         .. deprecated::
@@ -1341,8 +1341,8 @@ class Datawrapper:
         ----------
         chart_id : str
             ID of chart, table or map to add data to.
-        data : pd.DataFrame | str
-            A pandas dataframe containing the data to be added or a string that contains
+        data : IntoDataFrame | str
+            A dataframe (pandas, Polars, PyArrow, etc.) containing the data to be added or a string that contains
             the data.
 
         Returns
@@ -1358,9 +1358,11 @@ class Datawrapper:
             stacklevel=2,
         )
 
-        # If data is a pandas dataframe, convert to csv
-        if isinstance(data, pd.DataFrame):
-            _data = data.to_csv(index=False, encoding="utf-8")
+        # If data is a dataframe, convert to csv
+        if not isinstance(data, str):
+            _data = to_csv(data)
+            if _data is None:
+                _data = ""
         # If data is a string, use that
         else:
             _data = data

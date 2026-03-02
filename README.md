@@ -5,7 +5,7 @@ A lightweight Python wrapper for the Datawrapper API
 ## Features
 
 * Create, get, update, export and delete charts, tables and maps
-* Add data from a `pandas.DataFrame` or a GeoJSON file with one simple call
+* Add data from a `pandas.DataFrame`, `polars.DataFrame`, `pyarrow.Table`, or any other dataframe library supported by [Narwhals](https://narwhals-dev.github.io/narwhals/)
 * Get, update and delete folders, users and teams.
 * Retrieve lists of recently edited and updated charts
 * Access metadata about your account
