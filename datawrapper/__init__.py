@@ -38,12 +38,14 @@ from datawrapper.charts import (
     RangeAnnotation,
     ScatterPlot,
     StackedBarChart,
+    Table,
     TextAnnotation,
     Transform,
     XLineAnnotation,
     XRangeAnnotation,
     YLineAnnotation,
     YRangeAnnotation,
+    Table
 )
 from datawrapper.charts.enums import (
     ArrowHead,
@@ -117,6 +119,7 @@ __all__ = [
     "MultipleColumnYRangeAnnotation",
     "ScatterPlot",
     "StackedBarChart",
+    "Table",
     "TextAnnotation",
     "RangeAnnotation",
     "XRangeAnnotation",
@@ -160,4 +163,5 @@ __all__ = [
     "FailedRequestError",
     "InvalidRequestError",
     "RateLimitError",
+    "Table"
 ]
