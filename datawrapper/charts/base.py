@@ -1,14 +1,13 @@
 import os
 import warnings
-from io import StringIO
 from typing import Any, Literal
 
-import pandas as pd
 from IPython.display import IFrame
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from datawrapper.__main__ import Datawrapper
 from datawrapper.charts.models import Annotate, Describe, Publish, Transform, Visualize
+from datawrapper.dataframe_utils import from_csv, is_empty, to_csv
 
 
 class BaseChart(BaseModel):
@@ -89,7 +88,7 @@ class BaseChart(BaseModel):
     #
 
     #: The data to use for the chart
-    data: pd.DataFrame | list[dict] = Field(
+    data: Any | list[dict[str, Any]] = Field(
         default_factory=list[dict], description="The data to use for the chart"
     )
 
@@ -341,20 +340,11 @@ class BaseChart(BaseModel):
             CSV string representation of the data, or None if data is empty.
         """
         # Check if data is empty
-        if isinstance(self.data, pd.DataFrame):
-            if self.data.empty:
-                return None
-        else:
-            if not bool(self.data):
-                return None
+        if is_empty(self.data):
+            return None
 
-        # Convert to CSV
-        if isinstance(self.data, pd.DataFrame):
-            return self.data.to_csv(index=False, encoding="utf-8")
-        else:
-            # Convert list of dicts to DataFrame first, then to CSV
-            df = pd.DataFrame(self.data)
-            return df.to_csv(index=False, encoding="utf-8")
+        # Convert to CSV using the utility function
+        return to_csv(self.data)
 
     #
     # Deserialization methods for parsing API responses and input data
@@ -412,19 +402,16 @@ class BaseChart(BaseModel):
         return data
 
     @classmethod
-    def deserialize_data(cls, csv_data: str | pd.DataFrame) -> pd.DataFrame:
+    def deserialize_data(cls, csv_data: str | Any) -> Any:
         """Parse CSV string from Datawrapper API into DataFrame.
 
         Args:
             csv_data: The CSV data from the chart data endpoint
 
         Returns:
-            DataFrame containing the parsed CSV data
+            DataFrame containing the parsed CSV data (defaults to pandas for backward compatibility)
         """
-        # Use sep=None with engine='python' to auto-detect delimiter (comma or tab)
-        if isinstance(csv_data, pd.DataFrame):
-            return csv_data
-        return pd.read_csv(StringIO(csv_data), sep=None, engine="python")
+        return from_csv(csv_data)
 
     @classmethod
     def deserialize_model(cls, api_response: dict[str, Any]) -> dict[str, Any]:
