@@ -45,6 +45,7 @@ def get_chart(chart_id: str, access_token: str | None = None) -> BaseChart:
         BarChart,
         ColumnChart,
         LineChart,
+        LocatorMap,
         MultipleColumnChart,
         ScatterPlot,
         StackedBarChart,
@@ -60,6 +61,7 @@ def get_chart(chart_id: str, access_token: str | None = None) -> BaseChart:
         "d3-bars-split": MultipleColumnChart,
         "d3-scatter-plot": ScatterPlot,
         "d3-bars-stacked": StackedBarChart,
+        "locator-map": LocatorMap,
     }
 
     # Fetch chart metadata to determine type

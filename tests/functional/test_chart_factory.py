@@ -11,6 +11,7 @@ from datawrapper.charts import (
     BarChart,
     ColumnChart,
     LineChart,
+    LocatorMap,
     MultipleColumnChart,
     ScatterPlot,
     StackedBarChart,
@@ -272,6 +273,37 @@ def test_get_chart_stacked_bar_chart():
         assert result.chart_id == "stacked555"
 
 
+def test_get_chart_locator_map():
+    """Test get_chart returns LocatorMap for locator-map type."""
+    # Create a mock Datawrapper client
+    mock_client = MagicMock(spec=Datawrapper)
+
+    # Mock get_chart response with locator map metadata
+    mock_metadata = {
+        "id": "locator999",
+        "title": "Regional Locations",
+        "type": "locator-map",
+        "metadata": {"visualize": {}},
+    }
+    mock_client.get_chart.return_value = mock_metadata
+
+    with (
+        patch("datawrapper.Datawrapper", return_value=mock_client),
+        patch.object(LocatorMap, "get") as mock_locator_get,
+    ):
+        # Configure mock_locator_get to return a LocatorMap instance
+        mock_locator_map = LocatorMap(title="Regional Locations")
+        mock_locator_map.chart_id = "locator999"
+        mock_locator_get.return_value = mock_locator_map
+
+        # Call get_chart
+        result = get_chart(chart_id="locator999")
+
+        # Verify result is a LocatorMap instance
+        assert isinstance(result, LocatorMap)
+        assert result.chart_id == "locator999"
+
+
 def test_get_chart_with_access_token():
     """Test get_chart passes access_token to both Datawrapper and chart class."""
     # Create a mock Datawrapper client
@@ -361,6 +393,7 @@ def test_get_chart_all_supported_types():
         "d3-bars-split": MultipleColumnChart,
         "d3-scatter-plot": ScatterPlot,
         "d3-bars-stacked": StackedBarChart,
+        "locator-map": LocatorMap,
     }
 
     for chart_type, expected_class in supported_types.items():
