@@ -7,6 +7,7 @@ from .grid_label import GridLabelAlign, GridLabelPosition
 from .interpolation import LineInterpolation
 from .line_dash import LineDash
 from .line_width import LineWidth
+from .map_style import MapStyle
 from .number_divisor import NumberDivisor
 from .number_format import NumberFormat
 from .plot_height import PlotHeightMode
@@ -37,6 +38,7 @@ __all__ = [
     "LineDash",
     "LineInterpolation",
     "LineWidth",
+    "MapStyle",
     "NumberDivisor",
     "NumberFormat",
     "PlotHeightMode",

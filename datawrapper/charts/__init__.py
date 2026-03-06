@@ -13,6 +13,7 @@ from .enums import (
     LineDash,
     LineInterpolation,
     LineWidth,
+    MapStyle,
     NumberDivisor,
     NumberFormat,
     PlotHeightMode,
@@ -34,6 +35,7 @@ from .enums import (
     ValueLabelPlacement,
 )
 from .line import AreaFill, Line, LineChart, LineSymbol, LineValueLabel
+from .locator_map import LocatorMap
 from .models import (
     Annotate,
     ColumnFormat,
@@ -49,6 +51,20 @@ from .models import (
     Sharing,
     Transform,
     Visualize,
+)
+from .models.locator_map import MapKey, MapView, MapVisibility, MiniMap
+from .models.markers import (
+    AreaMarker,
+    AreaProperties,
+    GeoJSONFeature,
+    GeoJSONGeometry,
+    LineMarker,
+    LineProperties,
+    MarkerIcon,
+    MarkerText,
+    MarkerTooltip,
+    MarkerVisibility,
+    PointMarker,
 )
 from .models.range_annotations import (
     RangeAnnotation,
@@ -95,6 +111,7 @@ __all__ = (
     "LineDash",
     "LineInterpolation",
     "LineWidth",
+    "MapStyle",
     "NumberDivisor",
     "NumberFormat",
     "PlotHeightMode",
@@ -121,6 +138,21 @@ __all__ = (
     "ValueLabelMode",
     "ValueLabelPlacement",
     "Visualize",
+    "MapKey",
+    "MapView",
+    "MapVisibility",
+    "MiniMap",
+    "PointMarker",
+    "AreaMarker",
+    "LineMarker",
+    "MarkerIcon",
+    "MarkerText",
+    "MarkerTooltip",
+    "MarkerVisibility",
+    "AreaProperties",
+    "LineProperties",
+    "GeoJSONFeature",
+    "GeoJSONGeometry",
     "BaseChart",
     "BarOverlay",
     "BarChart",
@@ -132,6 +164,7 @@ __all__ = (
     "AreaFill",
     "AreaChart",
     "ArrowChart",
+    "LocatorMap",
     "MultipleColumnChart",
     "MultipleColumnTextAnnotation",
     "MultipleColumnRangeAnnotation",
