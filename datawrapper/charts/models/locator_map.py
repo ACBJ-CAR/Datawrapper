@@ -15,7 +15,7 @@ class MapView(BaseModel):
     )
 
     #: Zoom level (0-15, where 0 is whole world)
-    zoom: int | None = Field(
+    zoom: float | None = Field(
         default=None,
         description="Zoom level (0-15, where 0 = whole world)",
     )
@@ -33,13 +33,13 @@ class MapView(BaseModel):
     )
 
     #: Map rotation in degrees (0 = north-oriented)
-    bearing: int | None = Field(
+    bearing: float | None = Field(
         default=None,
         description="Map rotation in degrees (0 = north-oriented)",
     )
 
     #: Map tilt in degrees (0-60)
-    pitch: int | None = Field(
+    pitch: float | None = Field(
         default=None,
         description="Map tilt in degrees (0-60)",
     )
@@ -125,8 +125,8 @@ class MiniMap(BaseModel):
         description="Enable mini map",
     )
 
-    #: Bounds for mini map
-    bounds: list[Any] | None = Field(
+    #: Bounds for mini map (can be a list or dict structure)
+    bounds: list[Any] | dict[str, Any] | None = Field(
         default=None,
         description="Bounds for mini map",
     )

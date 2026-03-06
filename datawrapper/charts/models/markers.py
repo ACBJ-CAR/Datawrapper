@@ -91,7 +91,7 @@ class PointMarker(BaseModel):
 
     #: Marker text (displayed next to symbol, supports HTML)
     title: str | None = Field(
-        default=None,
+        default="",
         description="Marker text displayed next to the symbol (supports HTML like <strong>, <br>)"
     )
 

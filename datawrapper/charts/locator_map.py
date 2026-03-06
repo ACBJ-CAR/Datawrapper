@@ -217,6 +217,26 @@ class LocatorMap(BaseChart):
 
         return json.dumps({"markers": serialized_markers})
 
+    @classmethod
+    def deserialize_data(cls, data_response: dict[str, Any] | str) -> Any:
+        """Deserialize marker data from the Datawrapper API response.
+
+        Locator maps store markers as JSON, not CSV like other charts.
+        This method validates the marker data structure but returns an empty
+        DataFrame since LocatorMap uses markers, not tabular data.
+
+        Args:
+            data_response: The data response from the API (dict with markers or JSON string)
+
+        Returns:
+            Empty DataFrame (LocatorMap doesn't use the data field)
+        """
+        import pandas as pd
+
+        # Locator maps don't use tabular data, so return empty DataFrame
+        # The actual marker data is handled separately via get() method
+        return pd.DataFrame()
+
     def serialize_model(self) -> dict:
         """Serialize the locator map model to API format.
 
@@ -342,3 +362,51 @@ class LocatorMap(BaseChart):
         init_data["markers"] = []
 
         return init_data
+
+        @classmethod
+        def get(cls, chart_id: str, access_token: str | None = None) -> "LocatorMap":
+            """Fetch a locator map from the Datawrapper API.
+
+            Overrides the base class method to properly handle marker data.
+
+            Args:
+                chart_id: The ID of the chart to fetch
+                access_token: Optional API access token
+
+            Returns:
+                LocatorMap instance with all data populated from the API
+            """
+            import requests
+            from datawrapper.exceptions import FailedRequestError, RateLimitError
+
+            # Get chart instance using parent class method
+            instance = super().get(chart_id, access_token)
+
+            # Fetch marker data from the data endpoint
+            if instance._client:
+                try:
+                    # Construct data endpoint URL
+                    url = f"{instance._client.api_url}/v3/charts/{chart_id}/data"
+                    headers = {
+                        "Authorization": f"Bearer {instance._client.access_token}",
+                        "Accept": "application/json",
+                    }
+
+                    response = requests.get(url, headers=headers, timeout=30)
+
+                    if response.status_code == 200:
+                        # Extract marker data
+                        marker_data = response.json()
+                        if isinstance(marker_data, dict) and "markers" in marker_data:
+                            markers_list = marker_data.get("markers", [])
+                            if isinstance(markers_list, list):
+                                instance.markers = markers_list
+                    elif response.status_code == 429:
+                        raise RateLimitError(response.text)
+                    elif response.status_code >= 400:
+                        raise FailedRequestError(response.text)
+                except requests.RequestException as e:
+                    # If marker fetch fails, just continue with empty markers
+                    pass
+
+            return instance
