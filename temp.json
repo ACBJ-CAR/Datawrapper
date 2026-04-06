@@ -1,0 +1,260 @@
+{
+    "chart": {
+        "crdt": {
+            "data": {
+                "publicId": "ISquW",
+                "language": "en-US",
+                "theme": "datawrapper",
+                "chartHash": "627c12df98d95305188a927e07dce19f",
+                "id": "ISquW",
+                "type": "d3-maps-symbols",
+                "title": "Europe's countries on different demographic paths ",
+                "lastEditStep": 4,
+                "publicVersion": 0,
+                "deleted": false,
+                "forkable": false,
+                "isFork": false,
+                "metadata": {
+                    "data": {
+                        "changes": [],
+                        "transpose": false,
+                        "vertical-header": true,
+                        "horizontal-header": true,
+                        "auto-geocode": true,
+                        "column-order": [
+                            0,
+                            4,
+                            5,
+                            1,
+                            2,
+                            3
+                        ],
+                        "column-format": {
+                            "LAT": {
+                                "type": "number"
+                            },
+                            "LON": {
+                                "type": "number"
+                            },
+                            "geo": {
+                                "type": "text"
+                            },
+                            "pctchange": {
+                                "type": "auto"
+                            },
+                            "pct_change": {
+                                "type": "number"
+                            }
+                        },
+                        "upload-method": "copy"
+                    },
+                    "describe": {
+                        "source-name": "",
+                        "source-url": "",
+                        "intro": "<span style=\"text-ai\">Raw population  <b style=\"color:#00bbae\">increase↗</b> (or <b style=\"color:#fa8c00\">decrease↙</b>) in the decade from 2013 to 2023.",
+                        "byline": "",
+                        "aria-description": "",
+                        "number-format": "-",
+                        "number-divisor": 0,
+                        "number-append": "",
+                        "number-prepend": "",
+                        "hide-title": false
+                    },
+                    "visualize": {
+                        "dark-mode-invert": true,
+                        "highlighted-series": [],
+                        "highlighted-values": [],
+                        "sharing": {
+                            "enabled": false,
+                            "url": "https://www.datawrapper.de/_/ISquW",
+                            "auto": false
+                        },
+                        "labels": {
+                            "max": 1,
+                            "type": "places",
+                            "places": [],
+                            "enabled": false
+                        },
+                        "layers": {},
+                        "basemap": "europe-nuts3-2021",
+                        "legends": {
+                            "size": {
+                                "type": "stacked",
+                                "title": "",
+                                "values": [
+                                    10,
+                                    20
+                                ],
+                                "enabled": true,
+                                "offsetX": 5,
+                                "offsetY": 5,
+                                "position": "inside-right-top",
+                                "showValues": true,
+                                "titleWidth": 300,
+                                "labelFormat": "0%",
+                                "titleEnabled": false,
+                                "labelPosition": "right",
+                                "titlePosition": "left",
+                                "valuesSetting": "custom",
+                                "divergingTitle": {
+                                    "negative": "Fewer&nbsp;people",
+                                    "positive": "&nbsp;&nbsp;&nbsp;More&nbsp;people"
+                                }
+                            },
+                            "color": {
+                                "size": 170,
+                                "title": "",
+                                "labels": "ranges",
+                                "enabled": true,
+                                "offsetX": 0,
+                                "offsetY": 0,
+                                "reverse": false,
+                                "labelMax": "high",
+                                "labelMin": "low",
+                                "position": "above",
+                                "hideItems": [],
+                                "interactive": true,
+                                "labelCenter": "medium",
+                                "orientation": "horizontal",
+                                "customLabels": [],
+                                "titleEnabled": false
+                            }
+                        },
+                        "mapView": "full",
+                        "miniMap": {
+                            "size": 120,
+                            "type": "region",
+                            "enabled": false,
+                            "offsetX": 1,
+                            "offsetY": 1,
+                            "position": "bottom-left"
+                        },
+                        "tooltip": {
+                            "body": "{{ geo }} : {{ FORMAT(pctchange, \"+0.[0]%\") }}",
+                            "title": "",
+                            "sticky": true,
+                            "enabled": false
+                        },
+                        "max-size": 35,
+                        "zoomable": true,
+                        "map-align": "center",
+                        "clustering": {
+                            "size": 24,
+                            "type": "noverlap",
+                            "color": 0,
+                            "enabled": false,
+                            "gridSize": 15,
+                            "showCount": true,
+                            "tolerance": 0,
+                            "iterations": 4,
+                            "aggregation": "none"
+                        },
+                        "colorscale": {
+                            "map": {},
+                            "mode": "continuous",
+                            "stops": "equidistant",
+                            "colors": [],
+                            "palette": 0,
+                            "rangeMax": "",
+                            "rangeMin": "",
+                            "stopCount": 5,
+                            "customStops": [],
+                            "rangeCenter": "",
+                            "categoryOrder": [],
+                            "interpolation": "equidistant",
+                            "categoryLabels": {}
+                        },
+                        "fixed-size": 10,
+                        "map-padding": 0,
+                        "map-type-set": true,
+                        "symbol-color": "#00bbae",
+                        "symbol-shape": "arrow",
+                        "symbol-stroke": {
+                            "mode": "fixed",
+                            "color": "#000000",
+                            "enabled": true,
+                            "opacity": 0.5
+                        },
+                        "blend-multiply": false,
+                        "chart-type-set": true,
+                        "clusterTooltip": {
+                            "body": "",
+                            "title": "",
+                            "sticky": true,
+                            "enabled": false
+                        },
+                        "max-map-height": 650,
+                        "min-label-zoom": 1,
+                        "symbol-opacity": 1,
+                        "zoom-button-pos": "br",
+                        "arrow-angle-type": "opposite",
+                        "text-annotations": {},
+                        "range-annotations": [],
+                        "mapViewCropPadding": 10,
+                        "arrow-opposed-angle": 25,
+                        "hide-region-borders": true,
+                        "arrow-symmetric-angle": 25,
+                        "symbol-color-negative": "#fa8c00",
+                        "responsive-symbol-size": true,
+                        "basemapShowExtraOptions": false
+                    },
+                    "axes": {
+                        "lat": "LAT",
+                        "lon": "LON",
+                        "area": "pct_change",
+                        "address": "geo"
+                    },
+                    "publish": {
+                        "embed-width": 640,
+                        "embed-height": 603,
+                        "blocks": {
+                            "logo": {
+                                "enabled": false
+                            },
+                            "embed": false,
+                            "download-pdf": false,
+                            "download-svg": false,
+                            "get-the-data": false,
+                            "download-image": false
+                        },
+                        "export-pdf": {},
+                        "export-svg": {
+                            "width": 640,
+                            "height": 634,
+                            "include": "plain",
+                            "transparent": true,
+                            "fullVectorMode": true
+                        },
+                        "embed-codes": {
+                            "embed-method-iframe": "<iframe title=\"Europe's countries on different demographic paths \" aria-label=\"Map\" id=\"datawrapper-chart-Ea7pd\" src=\"https://datawrapper.dwcdn.net/Ea7pd/3/\" scrolling=\"no\" frameborder=\"0\" style=\"border: none;\" width=\"640\" height=\"606\" data-external=\"1\"></iframe>",
+                            "embed-method-responsive": "<iframe title=\"Europe's countries on different demographic paths \" aria-label=\"Map\" id=\"datawrapper-chart-Ea7pd\" src=\"https://datawrapper.dwcdn.net/Ea7pd/3/\" scrolling=\"no\" frameborder=\"0\" style=\"width: 0; min-width: 100% !important; border: none;\" height=\"606\" data-external=\"1\"></iframe><script type=\"text/javascript\">!function(){\"use strict\";window.addEventListener(\"message\",(function(a){if(void 0!==a.data[\"datawrapper-height\"]){var e=document.querySelectorAll(\"iframe\");for(var t in a.data[\"datawrapper-height\"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data[\"datawrapper-height\"][t]+\"px\";e[r].style.height=i}}}))}();\n</script>",
+                            "embed-method-web-component": "<div style=\"min-height:606px\" id=\"datawrapper-vis-Ea7pd\"><script type=\"text/javascript\" defer src=\"https://datawrapper.dwcdn.net/Ea7pd/embed.js\" charset=\"utf-8\" data-target=\"#datawrapper-vis-Ea7pd\"></script><noscript><img src=\"https://datawrapper.dwcdn.net/Ea7pd/full.png\" alt=\"\" /></noscript></div>"
+                        },
+                        "autoDarkMode": false,
+                        "chart-height": 0
+                    },
+                    "annotate": {
+                        "notes": ""
+                    },
+                    "custom": {
+                        "archive-note": ""
+                    }
+                },
+                "externalData": "",
+                "utf8": false,
+                "createdAt": "2026-04-06T15:26:11.000Z",
+                "lastModifiedAt": "2026-04-06T17:39:01.000Z",
+                "forkedFrom": "Ea7pd",
+                "organizationId": "G4dotIOk",
+                "authorId": 241232,
+                "workspace": "acbj"
+            },
+            "timestamps": {},
+            "pathsToItemArrays": [
+                "metadata.visualize.text-annotations"
+            ]
+        },
+        "clock": "0-0"
+    },
+    "data": "0-0"
+}

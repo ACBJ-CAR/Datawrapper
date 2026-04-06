@@ -84,7 +84,7 @@ class SymbolMap(BaseChart):
     #: The shape of symbols (circle, square, diamond, hexagon, triangle-up, triangle-down, marker)
     show_shape: SymbolMapShape | str = Field(
         default=SymbolMapShape.CIRCLE,
-        alias="shape",
+        alias="symbol-shape",
         description="Shape of symbols on the map",
     )
 
@@ -123,6 +123,30 @@ class SymbolMap(BaseChart):
         default=None,
         alias="label-by",
         description="Column to use for symbol labels",
+    )
+
+    #: Column name for latitude coordinates
+    lat: str | None = Field(
+        default=None,
+        description="Column to use for latitude coordinates",
+    )
+
+    #: Column name for longitude coordinates
+    lon: str | None = Field(
+        default=None,
+        description="Column to use for longitude coordinates",
+    )
+
+    #: Column name for addresses/place names
+    address: str | None = Field(
+        default=None,
+        description="Column to use for geocodable addresses/place names",
+    )
+
+    #: Column name for symbol area/size values
+    area: str | None = Field(
+        default=None,
+        description="Column to use for area/size values",
     )
 
     #
@@ -169,6 +193,7 @@ class SymbolMap(BaseChart):
     #: Symbol transparency/opacity (0-1)
     opacity: float | None = Field(
         default=None,
+        alias="symbol-opacity",
         description="Symbol opacity/transparency (0-1)",
     )
 
@@ -181,6 +206,7 @@ class SymbolMap(BaseChart):
     #: Use multiply blend mode for overlapping symbols
     multiply: bool | None = Field(
         default=None,
+        alias="blend-multiply",
         description="Use multiply blend mode for overlapping symbols",
     )
 
@@ -189,7 +215,8 @@ class SymbolMap(BaseChart):
     #
 
     #: Basemap to use (e.g., 'usa', 'world', 'europe')
-    basemap: str = Field(
+    basemap: str | None = Field(
+        default=None,
         description="Basemap to display (e.g., 'usa', 'world', 'europe')",
     )
 
@@ -203,6 +230,7 @@ class SymbolMap(BaseChart):
     #: Padding around data as percentage
     padding: int | None = Field(
         default=None,
+        alias="map-padding",
         description="Percentage padding around data extent",
     )
 
@@ -226,6 +254,7 @@ class SymbolMap(BaseChart):
     #: Legend configuration
     legend: SymbolMapLegend | dict[str, Any] | None = Field(
         default=None,
+        alias="legends",
         description="Legend configuration",
     )
 
@@ -242,6 +271,7 @@ class SymbolMap(BaseChart):
     #: Symbol grouping/clustering configuration
     grouping: SymbolMapGrouping | dict[str, Any] | None = Field(
         default=None,
+        alias="clustering",
         description="Symbol clustering configuration",
     )
 
@@ -252,7 +282,15 @@ class SymbolMap(BaseChart):
     @property
     def _axes(self) -> dict[str, str]:
         """Get axes configuration for API."""
-        axes = {}
+        axes: dict[str, str] = {}
+        if self.lat:
+            axes["lat"] = self.lat
+        if self.lon:
+            axes["lon"] = self.lon
+        if self.address:
+            axes["address"] = self.address
+        if self.area:
+            axes["area"] = self.area
         if self.size_by:
             axes["size"] = self.size_by
         if self.color_by:
@@ -260,3 +298,155 @@ class SymbolMap(BaseChart):
         if self.label_by:
             axes["label"] = self.label_by
         return axes
+
+    @staticmethod
+    def _expand_dotted_keys(data: dict[str, Any]) -> dict[str, Any]:
+        """Expand dotted keys (e.g. a.b) into nested dictionaries."""
+        result: dict[str, Any] = {}
+        for key, value in data.items():
+            if "." not in key:
+                result[key] = value
+                continue
+
+            parts = key.split(".")
+            current = result
+            for part in parts[:-1]:
+                existing = current.get(part)
+                if not isinstance(existing, dict):
+                    current[part] = {}
+                current = current[part]
+            current[parts[-1]] = value
+        return result
+
+    def serialize_model(self) -> dict[str, Any]:
+        """Serialize symbol map model to Datawrapper API format."""
+        model = super().serialize_model()
+
+        visualize: dict[str, Any] = {}
+
+        if self.basemap is not None:
+            visualize["basemap"] = self.basemap
+        if self.show_shape is not None:
+            visualize["symbol-shape"] = (
+                self.show_shape.value
+                if isinstance(self.show_shape, SymbolMapShape)
+                else self.show_shape
+            )
+        if self.max_size is not None:
+            visualize["max-size"] = self.max_size
+        if self.color_palette is not None:
+            visualize["color-palette"] = self.color_palette
+        if self.opacity is not None:
+            visualize["symbol-opacity"] = self.opacity
+        if self.outline is not None:
+            visualize["outline"] = self.outline
+        if self.multiply is not None:
+            visualize["blend-multiply"] = self.multiply
+        if self.crop_to_data is not None:
+            visualize["crop-to-data"] = self.crop_to_data
+        if self.padding is not None:
+            visualize["map-padding"] = self.padding
+        if self.hide_region_borders is not None:
+            visualize["hide-region-borders"] = self.hide_region_borders
+        if self.style is not None:
+            visualize["style"] = (
+                self.style.value if isinstance(self.style, MapStyle) else self.style
+            )
+
+        # Keep existing field for compatibility while providing a raw scale key.
+        color_scale_value = (
+            self.color_scale.value
+            if isinstance(self.color_scale, ColorScale)
+            else self.color_scale
+        )
+        visualize["color-scale"] = color_scale_value
+
+        if self.legend:
+            legend = (
+                self.legend
+                if isinstance(self.legend, dict)
+                else self.legend.model_dump(by_alias=True, exclude_none=True)
+            )
+            visualize["legends"] = self._expand_dotted_keys(legend)
+
+        if self.tooltip:
+            tooltip = (
+                self.tooltip
+                if isinstance(self.tooltip, dict)
+                else self.tooltip.model_dump(by_alias=True, exclude_none=True)
+            )
+            visualize["tooltip"] = self._expand_dotted_keys(tooltip)
+
+        if self.grouping:
+            grouping = (
+                self.grouping
+                if isinstance(self.grouping, dict)
+                else self.grouping.model_dump(by_alias=True, exclude_none=True)
+            )
+            visualize["clustering"] = self._expand_dotted_keys(grouping)
+
+        model["metadata"]["visualize"].update(visualize)
+
+        axes = self._axes
+        if axes:
+            model["metadata"]["axes"] = axes
+
+        return model
+
+    @classmethod
+    def deserialize_model(cls, api_response: dict[str, Any]) -> dict[str, Any]:
+        """Parse Datawrapper API response including symbol map specific fields."""
+        init_data = super().deserialize_model(api_response)
+
+        metadata = api_response.get("metadata", {})
+        visualize = metadata.get("visualize", {})
+        axes = metadata.get("axes", {})
+
+        if "basemap" in visualize:
+            init_data["basemap"] = visualize["basemap"]
+        if "symbol-shape" in visualize:
+            init_data["show_shape"] = visualize["symbol-shape"]
+        if "max-size" in visualize:
+            init_data["max_size"] = visualize["max-size"]
+        if "color-palette" in visualize:
+            init_data["color_palette"] = visualize["color-palette"]
+        if "symbol-opacity" in visualize:
+            init_data["opacity"] = visualize["symbol-opacity"]
+        if "outline" in visualize:
+            init_data["outline"] = visualize["outline"]
+        if "blend-multiply" in visualize:
+            init_data["multiply"] = visualize["blend-multiply"]
+        if "crop-to-data" in visualize:
+            init_data["crop_to_data"] = visualize["crop-to-data"]
+        if "map-padding" in visualize:
+            init_data["padding"] = visualize["map-padding"]
+        if "hide-region-borders" in visualize:
+            init_data["hide_region_borders"] = visualize["hide-region-borders"]
+        if "style" in visualize:
+            init_data["style"] = visualize["style"]
+        if "color-scale" in visualize:
+            init_data["color_scale"] = visualize["color-scale"]
+
+        if "legends" in visualize:
+            init_data["legend"] = visualize["legends"]
+        if "tooltip" in visualize:
+            init_data["tooltip"] = visualize["tooltip"]
+        if "clustering" in visualize:
+            init_data["grouping"] = visualize["clustering"]
+
+        if "lat" in axes:
+            init_data["lat"] = axes["lat"]
+        if "lon" in axes:
+            init_data["lon"] = axes["lon"]
+        if "address" in axes:
+            init_data["address"] = axes["address"]
+        if "area" in axes:
+            init_data["area"] = axes["area"]
+        if "size" in axes:
+            init_data["size_by"] = axes["size"]
+        if "color" in axes:
+            init_data["color_by"] = axes["color"]
+        if "label" in axes:
+            init_data["label_by"] = axes["label"]
+
+        return init_data
