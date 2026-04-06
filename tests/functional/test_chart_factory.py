@@ -15,6 +15,7 @@ from datawrapper.charts import (
     MultipleColumnChart,
     ScatterPlot,
     StackedBarChart,
+    SymbolMap,
 )
 
 
@@ -304,6 +305,37 @@ def test_get_chart_locator_map():
         assert result.chart_id == "locator999"
 
 
+def test_get_chart_symbol_map():
+    """Test get_chart returns SymbolMap for d3-maps-symbols type."""
+    # Create a mock Datawrapper client
+    mock_client = MagicMock(spec=Datawrapper)
+
+    # Mock get_chart response with symbol map metadata
+    mock_metadata = {
+        "id": "symbol888",
+        "title": "City Locations",
+        "type": "d3-maps-symbols",
+        "metadata": {"visualize": {}},
+    }
+    mock_client.get_chart.return_value = mock_metadata
+
+    with (
+        patch("datawrapper.Datawrapper", return_value=mock_client),
+        patch.object(SymbolMap, "get") as mock_symbol_get,
+    ):
+        # Configure mock_symbol_get to return a SymbolMap instance
+        mock_symbol_map = SymbolMap(title="City Locations")
+        mock_symbol_map.chart_id = "symbol888"
+        mock_symbol_get.return_value = mock_symbol_map
+
+        # Call get_chart
+        result = get_chart(chart_id="symbol888")
+
+        # Verify result is a SymbolMap instance
+        assert isinstance(result, SymbolMap)
+        assert result.chart_id == "symbol888"
+
+
 def test_get_chart_with_access_token():
     """Test get_chart passes access_token to both Datawrapper and chart class."""
     # Create a mock Datawrapper client
@@ -394,6 +426,7 @@ def test_get_chart_all_supported_types():
         "d3-scatter-plot": ScatterPlot,
         "d3-bars-stacked": StackedBarChart,
         "locator-map": LocatorMap,
+        "d3-maps-symbols": SymbolMap,
     }
 
     for chart_type, expected_class in supported_types.items():

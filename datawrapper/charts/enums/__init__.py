@@ -19,6 +19,7 @@ from .scatter_shape import (
     ScatterShape,
     ScatterSize,
 )
+from .symbol_map import ColorScale, SymbolMapShape
 from .symbol_shape import SymbolDisplay, SymbolShape, SymbolStyle
 from .text_align import TextAlign
 from .value_label import (
@@ -30,6 +31,7 @@ from .value_label import (
 
 __all__ = [
     "ArrowHead",
+    "ColorScale",
     "ConnectorLineType",
     "DateFormat",
     "GridDisplay",
@@ -51,6 +53,7 @@ __all__ = [
     "StrokeType",
     "StrokeWidth",
     "SymbolDisplay",
+    "SymbolMapShape",
     "SymbolShape",
     "SymbolStyle",
     "TextAlign",

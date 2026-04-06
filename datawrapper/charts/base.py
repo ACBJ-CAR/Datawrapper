@@ -78,6 +78,7 @@ class BaseChart(BaseModel):
         "d3-bars",
         "d3-bars-stacked",
         "d3-lines",
+        "d3-maps-symbols",
         "d3-scatter-plot",
         "locator-map",
         "multiple-columns",

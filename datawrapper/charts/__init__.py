@@ -5,6 +5,7 @@ from .base import BaseChart
 from .column import ColumnChart
 from .enums import (
     ArrowHead,
+    ColorScale,
     ConnectorLineType,
     DateFormat,
     GridDisplay,
@@ -26,6 +27,7 @@ from .enums import (
     StrokeType,
     StrokeWidth,
     SymbolDisplay,
+    SymbolMapShape,
     SymbolShape,
     SymbolStyle,
     TextAlign,
@@ -49,6 +51,9 @@ from .models import (
     Publish,
     PublishBlocks,
     Sharing,
+    SymbolMapGrouping,
+    SymbolMapLegend,
+    SymbolMapTooltip,
     Transform,
     Visualize,
 )
@@ -85,6 +90,7 @@ from .multiple_column import (
 )
 from .scatter import ScatterPlot
 from .stacked_bar import StackedBarChart
+from .symbol_map import SymbolMap
 from .table import Table
 
 __all__ = (
@@ -103,6 +109,7 @@ __all__ = (
     "GridFormatMixin",
     "GridDisplayMixin",
     "ArrowHead",
+    "ColorScale",
     "ConnectorLineType",
     "DateFormat",
     "GridDisplay",
@@ -124,6 +131,7 @@ __all__ = (
     "StrokeType",
     "StrokeWidth",
     "SymbolDisplay",
+    "SymbolMapShape",
     "SymbolShape",
     "SymbolStyle",
     "TextAlign",
@@ -153,6 +161,9 @@ __all__ = (
     "LineProperties",
     "GeoJSONFeature",
     "GeoJSONGeometry",
+    "SymbolMapGrouping",
+    "SymbolMapLegend",
+    "SymbolMapTooltip",
     "BaseChart",
     "BarOverlay",
     "BarChart",
@@ -174,5 +185,6 @@ __all__ = (
     "MultipleColumnYRangeAnnotation",
     "ScatterPlot",
     "StackedBarChart",
+    "SymbolMap",
     "Table",
 )

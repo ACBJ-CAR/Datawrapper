@@ -23,6 +23,11 @@ from .range_annotations import (
     YLineAnnotation,
     YRangeAnnotation,
 )
+from .symbol_map import (
+    SymbolMapGrouping,
+    SymbolMapLegend,
+    SymbolMapTooltip,
+)
 from .text_annotations import ConnectorLine, TextAnnotation
 from .transforms import ColumnFormat, ColumnFormatList, Transform
 
@@ -42,6 +47,9 @@ __all__ = [
     "PublishBlocks",
     "RangeAnnotation",
     "Sharing",
+    "SymbolMapGrouping",
+    "SymbolMapLegend",
+    "SymbolMapTooltip",
     "TextAnnotation",
     "Transform",
     "Visualize",
