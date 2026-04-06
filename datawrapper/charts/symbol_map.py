@@ -189,8 +189,7 @@ class SymbolMap(BaseChart):
     #
 
     #: Basemap to use (e.g., 'usa', 'world', 'europe')
-    basemap: str | None = Field(
-        default=None,
+    basemap: str = Field(
         description="Basemap to display (e.g., 'usa', 'world', 'europe')",
     )
 

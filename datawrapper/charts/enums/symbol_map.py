@@ -26,6 +26,7 @@ class SymbolMapShape(str, Enum):
         ... )
     """
 
+    ARROW = "arrow"
     CIRCLE = "circle"
     SQUARE = "square"
     DIAMOND = "diamond"
