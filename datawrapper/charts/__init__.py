@@ -2,9 +2,11 @@ from .area import AreaChart
 from .arrow import ArrowChart
 from .bar import BarChart, BarOverlay
 from .base import BaseChart
+from .choropleth_map import ChoroplethMap, Tooltip
 from .column import ColumnChart
 from .enums import (
     ArrowHead,
+    BasemapProjection,
     ConnectorLineType,
     DateFormat,
     GridDisplay,
@@ -103,6 +105,7 @@ __all__ = (
     "GridFormatMixin",
     "GridDisplayMixin",
     "ArrowHead",
+    "BasemapProjection",
     "ConnectorLineType",
     "DateFormat",
     "GridDisplay",
@@ -156,6 +159,7 @@ __all__ = (
     "BaseChart",
     "BarOverlay",
     "BarChart",
+    "ChoroplethMap",
     "ColumnChart",
     "LineChart",
     "Line",
@@ -175,4 +179,5 @@ __all__ = (
     "ScatterPlot",
     "StackedBarChart",
     "Table",
+    "Tooltip",
 )
