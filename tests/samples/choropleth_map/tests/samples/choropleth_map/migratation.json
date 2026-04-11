@@ -1,0 +1,354 @@
+{
+    "chart": {
+        "crdt": {
+            "data": {
+                "publicId": "wFYXf",
+                "language": "en-US",
+                "theme": "acbj",
+                "chartHash": "ee52747fd81efc381951c06ceabbddc5",
+                "id": "wFYXf",
+                "type": "d3-maps-choropleth",
+                "title": "Memphis Metro Net Migration",
+                "lastEditStep": 5,
+                "publishedAt": "2026-04-10T22:25:11.334Z",
+                "publicUrl": "https://datawrapper.dwcdn.net/wFYXf/2/",
+                "publicVersion": 2,
+                "deleted": false,
+                "forkable": true,
+                "isFork": false,
+                "metadata": {
+                    "data": {
+                        "changes": [],
+                        "transpose": false,
+                        "vertical-header": true,
+                        "horizontal-header": true,
+                        "column-order": [],
+                        "column-format": {
+                            "agi_net": {
+                                "type": "number"
+                            },
+                            "msa_code": {
+                                "type": "text"
+                            },
+                            "msa_name": {
+                                "type": "auto"
+                            },
+                            "is_market": {
+                                "type": "text"
+                            }
+                        },
+                        "external-data": "",
+                        "upload-method": "copy",
+                        "use-datawrapper-cdn": true
+                    },
+                    "describe": {
+                        "source-name": "IRS",
+                        "source-url": "https://www.irs.gov/statistics",
+                        "intro": "Memphis metro lost $468,687,000 of income earned by local tax filers from migration between 2022 and 2023. XX% was from migration within the U.S. Memphis lost the most income to XX metro, a net $XX, and gained the most income from XX metro, a net $XX.\n",
+                        "byline": "",
+                        "aria-description": "",
+                        "number-format": "-",
+                        "number-divisor": 0,
+                        "number-append": "",
+                        "number-prepend": "",
+                        "hide-title": false
+                    },
+                    "visualize": {
+                        "dark-mode-invert": true,
+                        "highlighted-series": [],
+                        "highlighted-values": [],
+                        "sharing": {
+                            "enabled": false,
+                            "url": "",
+                            "auto": false
+                        },
+                        "labels": {
+                            "max": 23,
+                            "type": "places",
+                            "places": [
+                                {
+                                    "x": -77.036132,
+                                    "y": 38.8953082,
+                                    "text": "Washington\nD.C.",
+                                    "type": "capital",
+                                    "align": "br",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -66.115722,
+                                    "y": 18.4639785,
+                                    "text": "San Juan",
+                                    "type": "capital",
+                                    "align": "tl",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -118.24035,
+                                    "y": 34.0526594,
+                                    "text": "Los Angeles",
+                                    "type": "point",
+                                    "align": "tr",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -73.987426,
+                                    "y": 40.7306084,
+                                    "text": "New York",
+                                    "type": "point",
+                                    "align": "tl",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -87.626953,
+                                    "y": 41.8736512,
+                                    "text": "Chicago",
+                                    "type": "point",
+                                    "align": "tl",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -122.42065,
+                                    "y": 37.7793985,
+                                    "text": "San\nFrancisco",
+                                    "type": "point",
+                                    "align": "tr",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -104.98535,
+                                    "y": 39.7409863,
+                                    "text": "Denver",
+                                    "type": "point",
+                                    "align": "tr",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                },
+                                {
+                                    "x": -95.366821,
+                                    "y": 29.7596087,
+                                    "text": "Houston",
+                                    "type": "point",
+                                    "align": "bl",
+                                    "custom": false,
+                                    "visible": true,
+                                    "inverted": false
+                                }
+                            ],
+                            "enabled": false
+                        },
+                        "layers": {},
+                        "basemap": "usa-msa",
+                        "legends": {
+                            "color": {
+                                "size": 170,
+                                "title": "Net AGI",
+                                "labels": "ruler",
+                                "enabled": true,
+                                "offsetX": 0,
+                                "offsetY": 0,
+                                "reverse": false,
+                                "labelMax": "high",
+                                "labelMin": "low",
+                                "position": "inside-left-top",
+                                "hideItems": [],
+                                "interactive": false,
+                                "labelCenter": "medium",
+                                "labelFormat": "$0a",
+                                "orientation": "vertical",
+                                "customLabels": [
+                                    "Group A",
+                                    "Group B",
+                                    "Group C",
+                                    "Group D",
+                                    "Group E"
+                                ],
+                                "titleEnabled": true
+                            },
+                            "pattern": {
+                                "size": 170,
+                                "title": "",
+                                "enabled": true,
+                                "offsetX": 0,
+                                "offsetY": 0,
+                                "position": "above",
+                                "interactive": true,
+                                "orientation": "horizontal",
+                                "titleEnabled": false,
+                                "useColorLegendPosition": false
+                            },
+                            "combined": {
+                                "orientation": "vertical"
+                            }
+                        },
+                        "mapView": "full",
+                        "miniMap": {
+                            "size": 120,
+                            "type": "region",
+                            "enabled": false,
+                            "offsetX": 1,
+                            "offsetY": 1,
+                            "position": "bottom-left"
+                        },
+                        "tooltip": {
+                            "body": "{{ returns_net > 0 ? \"\" : \"<b>Values are suppressed.</b><br><br>\"}}\n<b>AGI:</b> {{ returns_out > 0 ? FORMAT(agi_net, \"$0.[0]a\") : \"NA\"}}<br>\n<b>Returns:</b> {{ returns_net > 0 ? FORMAT(returns_net, \"0.[00]a\") : \"<20 in each MSA county\" }}<br>\n<b>Individuals:</b> {{ returns_net > 0 ?FORMAT(individuals_net, \"0.[00]a\") : \"NA\"}}<br>",
+                            "title": "{{ msa_name }}",
+                            "sticky": true,
+                            "enabled": true,
+                            "migrated": true
+                        },
+                        "patterns": {
+                            "map": {
+                                "True": {
+                                    "gap": 1,
+                                    "label": "Memphis metro"
+                                }
+                            },
+                            "order": [],
+                            "enabled": true,
+                            "opacity": 78,
+                            "colorType": "auto-contrast"
+                        },
+                        "pie_size": {
+                            "inside_labels": 75,
+                            "outside_labels": 50
+                        },
+                        "zoomable": false,
+                        "map-align": "right",
+                        "colorscale": {
+                            "map": {},
+                            "mode": "discrete",
+                            "stops": "custom",
+                            "colors": [
+                                {
+                                    "color": "#B85F36",
+                                    "position": 0
+                                },
+                                {
+                                    "color": "#D49F86",
+                                    "position": 0.2
+                                },
+                                {
+                                    "color": "#F1DFD7",
+                                    "position": 0.4
+                                },
+                                {
+                                    "color": "#f3f3f3",
+                                    "position": 0.5012787723785166
+                                },
+                                {
+                                    "color": "#E2E8E1",
+                                    "position": 0.6
+                                },
+                                {
+                                    "color": "#A8BBA5",
+                                    "position": 0.8
+                                },
+                                {
+                                    "color": "#6E8E69",
+                                    "position": 1
+                                }
+                            ],
+                            "palette": 0,
+                            "rangeMax": "",
+                            "rangeMin": "",
+                            "stopCount": 5,
+                            "customStops": [
+                                null,
+                                "-10000000",
+                                "-0",
+                                "0.1",
+                                "10000000",
+                                null,
+                                "",
+                                "",
+                                ""
+                            ],
+                            "rangeCenter": "0",
+                            "categoryOrder": [],
+                            "interpolation": "equidistant",
+                            "categoryLabels": {}
+                        },
+                        "map-padding": 0,
+                        "hide-borders": false,
+                        "map-key-attr": "GEOID",
+                        "map-type-set": true,
+                        "show-tooltips": true,
+                        "chart-type-set": true,
+                        "max-map-height": 650,
+                        "min-label-zoom": 1,
+                        "zoom-button-pos": "br",
+                        "map-label-format": "0,0.[00]",
+                        "text-annotations": {},
+                        "range-annotations": [],
+                        "hide-empty-regions": false,
+                        "mapViewCropPadding": 10,
+                        "avoid-label-overlap": true,
+                        "hide-region-borders": false,
+                        "tooltip-number-format": ""
+                    },
+                    "axes": {
+                        "keys": "msa_code",
+                        "values": "agi_net",
+                        "pattern": "is_market"
+                    },
+                    "publish": {
+                        "embed-width": 600,
+                        "embed-height": 531,
+                        "blocks": {
+                            "logo": {
+                                "id": "",
+                                "enabled": false
+                            },
+                            "embed": false,
+                            "download-pdf": false,
+                            "download-svg": false,
+                            "get-the-data": false,
+                            "download-image": false
+                        },
+                        "export-pdf": {},
+                        "embed-codes": {
+                            "embed-method-responsive": "<iframe title=\"Memphis Metro Net Migration\" aria-label=\"Choropleth map\" id=\"datawrapper-chart-wFYXf\" src=\"https://datawrapper.dwcdn.net/wFYXf/2/\" scrolling=\"no\" frameborder=\"0\" style=\"width: 0; min-width: 100% !important; border: none;\" height=\"531\" data-external=\"1\"></iframe><script type=\"text/javascript\">window.addEventListener(\"message\",function(a){if(void 0!==a.data[\"datawrapper-height\"]){var e=document.querySelectorAll(\"iframe\");for(var t in a.data[\"datawrapper-height\"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data[\"datawrapper-height\"][t]+\"px\";r.style.height=d}}});</script>",
+                            "embed-method-iframe": "<iframe title=\"Memphis Metro Net Migration\" aria-label=\"Choropleth map\" id=\"datawrapper-chart-wFYXf\" src=\"https://datawrapper.dwcdn.net/wFYXf/2/\" scrolling=\"no\" frameborder=\"0\" style=\"border: none;\" width=\"600\" height=\"531\" data-external=\"1\"></iframe>",
+                            "embed-method-web-component": "<div style=\"min-height:531px\" id=\"datawrapper-vis-wFYXf\"><script type=\"text/javascript\" defer src=\"https://datawrapper.dwcdn.net/wFYXf/embed.js\" charset=\"utf-8\" data-target=\"#datawrapper-vis-wFYXf\"></script><noscript><img src=\"https://datawrapper.dwcdn.net/wFYXf/full.png\" alt=\"Memphis Metro Net Migration (Choropleth map)\" /></noscript></div>"
+                        },
+                        "autoDarkMode": false,
+                        "chart-height": 377,
+                        "force-attribution": false
+                    },
+                    "annotate": {
+                        "notes": ""
+                    },
+                    "custom": {
+                        "year": "2022-2023"
+                    }
+                },
+                "utf8": false,
+                "createdAt": "2026-04-10T22:07:23.000Z",
+                "lastModifiedAt": "2026-04-10T22:25:11.334Z",
+                "organizationId": "O58w6Wiz",
+                "authorId": 241232,
+                "folderId": 396704,
+                "workspace": "acbj"
+            },
+            "timestamps": {},
+            "pathsToItemArrays": [
+                "metadata.visualize.text-annotations"
+            ]
+        },
+        "clock": "0-0"
+    },
+    "data": "0-1"
+}

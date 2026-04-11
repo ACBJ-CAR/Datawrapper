@@ -92,6 +92,13 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
         description="The column containing values to visualize on the map",
     )
 
+    #: Optional pattern/group column for hatched region styling
+    pattern_column: str | None = Field(
+        default=None,
+        alias="pattern",
+        description="Optional column used for region pattern grouping",
+    )
+
     #: The type of the keys column (text or number)
     key_column_type: Literal["text", "number"] | None = Field(
         default=None,
@@ -227,6 +234,24 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
         description="End color of the gradient (hex color code, e.g., '#ff0000')",
     )
 
+    #: Legend configuration object
+    legends: dict[str, Any] | None = Field(
+        default=None,
+        description="Legend configuration object as expected by Datawrapper",
+    )
+
+    #: Pattern configuration object
+    patterns: dict[str, Any] | None = Field(
+        default=None,
+        description="Pattern fill configuration object as expected by Datawrapper",
+    )
+
+    #: Full colorscale configuration object
+    colorscale: dict[str, Any] | None = Field(
+        default=None,
+        description="Full colorscale configuration object as expected by Datawrapper",
+    )
+
     #
     # Serialization methods for preparing data for API upload
     #
@@ -243,6 +268,8 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
             axes_data["keys"] = self.keys_column
         if self.values_column is not None:
             axes_data["values"] = self.values_column
+        if self.pattern_column is not None:
+            axes_data["pattern"] = self.pattern_column
 
         # Only add axes if we have keys or values
         if axes_data:
@@ -290,7 +317,9 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
 
         # Add colorscale object if color configuration is present
         # This is necessary for Datawrapper to actually apply the colors
-        if self.color_from is not None and self.color_to is not None:
+        if self.colorscale is not None:
+            visualize_data["colorscale"] = self.colorscale
+        elif self.color_from is not None and self.color_to is not None:
             # Determine interpolation type based on color_scale
             interpolation = "equidistant"
             if self.color_scale == "quantile":
@@ -325,6 +354,12 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
             ]
 
             visualize_data["colorscale"] = colorscale_config
+
+        # Add structured legend/pattern settings
+        if self.legends is not None:
+            visualize_data["legends"] = self.legends
+        if self.patterns is not None:
+            visualize_data["patterns"] = self.patterns
 
         # Add basemap configuration
         if self.basemap:
@@ -383,6 +418,8 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
             init_data["keys_column"] = axes["keys"]
         if "values" in axes:
             init_data["values_column"] = axes["values"]
+        if "pattern" in axes:
+            init_data["pattern_column"] = axes["pattern"]
 
         # Extract key_column_type from metadata.data.column-format
         data_section = metadata.get("data", {})
@@ -436,6 +473,12 @@ class ChoroplethMap(AnnotationsMixin, BaseChart):
             init_data["color_from"] = visualize["color-from"]
         if "color-to" in visualize:
             init_data["color_to"] = visualize["color-to"]
+        if "legends" in visualize:
+            init_data["legends"] = visualize["legends"]
+        if "patterns" in visualize:
+            init_data["patterns"] = visualize["patterns"]
+        if "colorscale" in visualize:
+            init_data["colorscale"] = visualize["colorscale"]
 
         # Annotations
         init_data.update(cls._deserialize_annotations(visualize))

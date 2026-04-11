@@ -43,13 +43,14 @@ def get_chart(chart_id: str, access_token: str | None = None) -> BaseChart:
         AreaChart,
         ArrowChart,
         BarChart,
+        ChoroplethMap,
         ColumnChart,
         LineChart,
         LocatorMap,
         MultipleColumnChart,
         ScatterPlot,
         StackedBarChart,
-        Table
+        Table,
     )
 
     # Type mapping from Datawrapper API chart types to Python chart classes
@@ -64,6 +65,7 @@ def get_chart(chart_id: str, access_token: str | None = None) -> BaseChart:
         "d3-bars-stacked": StackedBarChart,
         "tables": Table,
         "locator-map": LocatorMap,
+        "d3-maps-choropleth": ChoroplethMap,
     }
 
     # Fetch chart metadata to determine type
