@@ -247,6 +247,13 @@ class BaseChart(BaseModel):
         exclude=True,  # Don't include in serialization
     )
 
+    #: The folder ID to create the chart in or that the chart is currently in
+    folder_id: int | None = Field(
+        default=None,
+        description="The folder ID to create the chart in or that the chart is currently in",
+        exclude=True,  # Don't include in serialization
+    )
+
     #
     # Serialization methods for preparing data for API upload
     #
@@ -448,6 +455,7 @@ class BaseChart(BaseModel):
             "theme": api_response.get("theme"),
             "language": api_response.get("language"),
             "forkable": api_response.get("forkable"),
+            "folder_id": api_response.get("folderId"),
             # Data transformations (but not the data itself)
             "transformations": Transform.model_validate(metadata.get("data", {})),
             # Description
@@ -632,7 +640,8 @@ class BaseChart(BaseModel):
             forkable=self.forkable,
             language=metadata.get("language"),
             metadata=metadata["metadata"],
-            folder_id=folder_id,
+            folder_id=folder_id
+            or self.folder_id,  # Use parameter if provided, otherwise use instance attribute
         )
 
         # Extract and validate the chart ID
@@ -674,6 +683,7 @@ class BaseChart(BaseModel):
         # Use the convenience method from the client to update the chart
         client.update_chart(
             chart_id=self.chart_id,
+            folder_id=self.folder_id,
             title=metadata["title"],
             chart_type=metadata["type"],
             theme=metadata.get("theme") or None,
